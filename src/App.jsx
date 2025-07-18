@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { nanoid } from "nanoid";
 import Confetti from "react-confetti";
-import "./App.css";
 import Die from "./components/Die";
 
 function App() {
@@ -56,7 +55,7 @@ function App() {
   }
 
   return (
-    <main>
+    <main className="w-full max-w-[400px] min-h-[400px] bg-gray-100 rounded-2xl p-6 shadow-[0_10px_30px_rgba(0,0,0,0.5)] flex flex-col justify-evenly items-center mx-auto">
       {gameWon && <Confetti />}
       <div aria-live="polite" className="sr-only">
         {gameWon && (
@@ -65,13 +64,20 @@ function App() {
           </p>
         )}
       </div>
-      <h1 className="title">Tenzies</h1>
-      <p className="instructions">
+      <h1 className="text-[40px] text-center m-0 font-bold">Tenzies</h1>
+      <p className="text-center font-semibold m-0 text-base sm:text-sm">
         Roll until all dice are the same. Click each die to freeze it at its
         current value between rolls.
       </p>
-      <div className="dice-container">{diceElements}</div>
-      <button ref={btnRef} onClick={rollDice} className="roll-dice">
+      <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-3 justify-center my-4">
+        {diceElements}
+      </div>
+
+      <button
+        ref={btnRef}
+        onClick={rollDice}
+        className="bg-indigo-700 text-white py-2 px-6 h-[50px] sm:h-[45px] text-lg sm:text-base rounded-md cursor-pointer whitespace-nowrap"
+      >
         {gameWon ? "New Game" : "Roll"}
       </button>
     </main>
@@ -79,10 +85,3 @@ function App() {
 }
 
 export default App;
-
-// Extra credit ideas:
-// 01 Add a timer and a roll counter to see how
-// quickly you can win the game
-// 02 Style the dice to look like real dice with pips
-// instead of numbers
-// 03 Deploy your project live for others to play!
